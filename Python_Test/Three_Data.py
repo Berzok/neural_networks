@@ -1,6 +1,9 @@
 #coding: utf-8
 import numpy as np
 import random
+import os
+
+os.system('clear')
 
 # sigmoid function
 def nonlin(x,deriv=False):
@@ -8,25 +11,43 @@ def nonlin(x,deriv=False):
         return x*(1-x)
     return 1/(1+np.exp(-x))
 
-def aleaInt():
-    return random.randint(0, 3)
+def aleaInt(n):
+    return random.randint(0, n)
 
 def proba2answer(trainedData):
     trainedData = np.around(trainedData, 0)
     return nonlin(trainedData)
-    
-    
+
+def generateMatrix(row, columns):
+	laListe = []
+	lesOccurrences = []
+	for i in range(row):
+		laListe.append([])
+		for j in range(columns):
+			laListe[i].append(aleaInt(3))
+		print laListe
+	for i in laListe:
+		for j in i:
+			lesOccurrences.append(i.count(j))
+	for i in range(len(lesOccurrences)):
+#		for j in range(len(lesOccurrences[i])):
+		print "Valeur", i, ": ", lesOccurrences[i], "occurrences"
+	return laListe
+
+
+X = np.array(generateMatrix(4, 3))
+
 # input dataset
-X = np.array([  [aleaInt(), aleaInt(), aleaInt()],
-                [aleaInt(), aleaInt(), aleaInt()],
-                [aleaInt(), aleaInt(), aleaInt()],
-                [aleaInt(), aleaInt(), aleaInt()] ])
+#X = np.array([  [aleaInt(), aleaInt(), aleaInt()],
+#                [aleaInt(), aleaInt(), aleaInt()],
+#                [aleaInt(), aleaInt(), aleaInt()],
+#                [aleaInt(), aleaInt(), aleaInt()] ])
 
 print "Input matrix: "
 print X
 
 # output dataset            
-y = np.array([[aleaInt(),aleaInt(),aleaInt(),aleaInt()]]).T
+y = np.array([[aleaInt(3), aleaInt(3), aleaInt(3), aleaInt(3)]]).T
 
 print "Output matrix: "
 print y, "\n"
@@ -38,7 +59,7 @@ np.random.seed(1)
 # initialize weights randomly with mean 0
 syn0 = 2*np.random.random((3,1)) - 1
 
-for iter in xrange(10000):
+for iter in xrange(100000):
 
     # forward propagation
     l0 = X
@@ -57,7 +78,7 @@ for iter in xrange(10000):
 
 print "Output After Training:"
 print l1
-print "R�sulats obtenus:"
+print "Résulats obtenus:"
 print np.dot(l0,syn0)
-print "R�ponse fournie: "
+print "Réponse fournie: "
 print proba2answer(l1)

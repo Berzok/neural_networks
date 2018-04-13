@@ -18,12 +18,20 @@ def proba2answer(trainedData):
     
 # input dataset
 X = np.array([  [0,0,1],
-                [0,1,0],
-                [1,0,1],
-                [1,1,1] ])
-    
+                          [0,1,0],
+     			         [1,0,1],
+      			        [1,1,1] ])
+
+print "Input matrix: "
+print X
+
+
 # output dataset            
 y = np.array([[0,0,1,1]]).T
+
+print "Output matrix: "
+print y, "\n"
+
 
 # seed random numbers to make calculation
 # deterministic (just a good practice)
